@@ -11,3 +11,7 @@ Mercury.modules
 *.beams
 *.d
 *.c_date
+node_modules/
+.env
+.next/
+*.tsbuildinfo
