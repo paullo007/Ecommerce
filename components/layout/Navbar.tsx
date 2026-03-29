@@ -77,11 +77,11 @@ export function Navbar() {
             <Link
               href="/"
               className={cn(
-                'font-display text-xl font-medium tracking-tight transition-colors duration-300',
+                'font-display font-light tracking-tight transition-colors duration-300 text-[clamp(1.8rem,4vw,2.8rem)] leading-[1.1]',
                 scrolled ? 'text-charcoal' : 'text-white'
               )}
             >
-              Maison<span className="font-light italic"> Avant-Garde</span>
+              Maison<span className="italic"> Avant-Garde</span>
             </Link>
 
             {/* Desktop Nav */}
