@@ -70,7 +70,7 @@ VALUES (
 INSERT INTO "ProductImage" ("id", "url", "alt", "primary", "sortOrder", "productId")
 VALUES
   (gen_random_uuid()::text, 'https://images.unsplash.com/photo-1617104678098-de229db51175?w=800&q=80', 'Slab Dining Table — White Marble', true, 0, (SELECT "id" FROM "Product" WHERE "slug" = 'slab-dining-table-marble')),
-  (gen_random_uuid()::text, 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80', 'Slab Dining Table — White Marble', false, 1, (SELECT "id" FROM "Product" WHERE "slug" = 'slab-dining-table-marble'));
+  (gen_random_uuid()::text, 'https://images.unsplash.com/photo-1604578762246-41134e37f9cc?w=800&q=80', 'Slab Dining Table — White Marble', false, 1, (SELECT "id" FROM "Product" WHERE "slug" = 'slab-dining-table-marble'));
 
 INSERT INTO "Product" ("id", "name", "slug", "description", "shortDesc", "price", "comparePrice", "stock", "featured", "newArrival", "bestSeller", "isAvailable", "material", "dimensions", "origin", "tags", "categoryId", "createdAt", "updatedAt")
 VALUES (
@@ -386,7 +386,7 @@ VALUES (
 
 INSERT INTO "ProductImage" ("id", "url", "alt", "primary", "sortOrder", "productId")
 VALUES
-  (gen_random_uuid()::text, 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80', 'Smart Dimmer Switch — Brushed Nickel', true, 0, (SELECT "id" FROM "Product" WHERE "slug" = 'smart-dimmer-switch-brushed-nickel'));
+  (gen_random_uuid()::text, 'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=800&q=80', 'Smart Dimmer Switch — Brushed Nickel', true, 0, (SELECT "id" FROM "Product" WHERE "slug" = 'smart-dimmer-switch-brushed-nickel'));
 
 -- PLANTS & BOTANICALS (1)
 
