@@ -8,7 +8,7 @@ import { ArrowRight, ChevronDown } from 'lucide-react'
 const slides = [
   {
     id: 1,
-    eyebrow: 'New Collection 2025',
+    eyebrow: 'New Collection 2026',
     title: 'Live Bold.\nLive Avant-Garde.',
     subtitle:
       'Transform every room into a statement. Curated furniture, art, and decor for the fearlessly designed home.',
