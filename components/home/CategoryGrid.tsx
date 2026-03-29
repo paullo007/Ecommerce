@@ -22,7 +22,7 @@ const categories = [
   {
     name: 'Wall Art & Decor',
     slug: 'wall-art-decor',
-    image: 'https://images.unsplash.com/photo-1513519245088-0e12902e35ca?w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=800&q=80',
     count: '320+ works',
     size: 'small',
   },
@@ -43,7 +43,7 @@ const categories = [
   {
     name: 'Outdoor Living',
     slug: 'outdoor-living',
-    image: 'https://images.unsplash.com/photo-1600210491892-03d54079b6ac?w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80',
     count: '140+ items',
     size: 'large',
   },

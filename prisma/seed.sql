@@ -194,7 +194,7 @@ VALUES (
 
 INSERT INTO "ProductImage" ("id", "url", "alt", "primary", "sortOrder", "productId")
 VALUES
-  (gen_random_uuid()::text, 'https://images.unsplash.com/photo-1513519245088-0e12902e35ca?w=800&q=80', 'Abstract Composition No. 7', true, 0, (SELECT "id" FROM "Product" WHERE "slug" = 'abstract-composition-no-7'));
+  (gen_random_uuid()::text, 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=800&q=80', 'Abstract Composition No. 7', true, 0, (SELECT "id" FROM "Product" WHERE "slug" = 'abstract-composition-no-7'));
 
 INSERT INTO "Product" ("id", "name", "slug", "description", "shortDesc", "price", "comparePrice", "stock", "featured", "newArrival", "bestSeller", "isAvailable", "material", "dimensions", "origin", "tags", "categoryId", "createdAt", "updatedAt")
 VALUES (
@@ -320,7 +320,7 @@ VALUES (
 
 INSERT INTO "ProductImage" ("id", "url", "alt", "primary", "sortOrder", "productId")
 VALUES
-  (gen_random_uuid()::text, 'https://images.unsplash.com/photo-1600210491892-03d54079b6ac?w=800&q=80', 'Teak Lounge Chair — Outdoor', true, 0, (SELECT "id" FROM "Product" WHERE "slug" = 'teak-lounge-chair-outdoor'));
+  (gen_random_uuid()::text, 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80', 'Teak Lounge Chair — Outdoor', true, 0, (SELECT "id" FROM "Product" WHERE "slug" = 'teak-lounge-chair-outdoor'));
 
 INSERT INTO "Product" ("id", "name", "slug", "description", "shortDesc", "price", "comparePrice", "stock", "featured", "newArrival", "bestSeller", "isAvailable", "material", "dimensions", "origin", "tags", "categoryId", "createdAt", "updatedAt")
 VALUES (
