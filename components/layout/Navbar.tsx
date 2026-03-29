@@ -77,7 +77,7 @@ export function Navbar() {
             <Link
               href="/"
               className={cn(
-                'font-display font-light tracking-tight transition-colors duration-300 text-[clamp(1.8rem,4vw,2.8rem)] leading-[1.1]',
+                'font-display font-light tracking-tight transition-colors duration-300 text-[clamp(2.2rem,5vw,3.2rem)] leading-[1.05]',
                 scrolled ? 'text-charcoal' : 'text-white'
               )}
             >
