@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
   try {
     event = stripe.webhooks.constructEvent(body, sig, process.env.STRIPE_WEBHOOK_SECRET!)
   } catch (err: any) {
-    console.error('Webhook signature error:', err.message)
+    if (process.env.NODE_ENV === 'development') console.error('Webhook signature error:', err.message)
     return NextResponse.json({ error: 'Invalid signature.' }, { status: 400 })
   }
 
@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
       case 'payment_intent.payment_failed': {
         const pi = event.data.object as Stripe.PaymentIntent
         // Handle payment failure — could notify user
-        console.log('Payment failed for:', pi.id)
+        if (process.env.NODE_ENV === 'development') console.log('Payment failed for:', pi.id)
         break
       }
 
@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
         break
     }
   } catch (error) {
-    console.error('Webhook handler error:', error)
+    if (process.env.NODE_ENV === 'development') console.error('Webhook handler error:', error)
     return NextResponse.json({ error: 'Webhook handling failed.' }, { status: 500 })
   }
 

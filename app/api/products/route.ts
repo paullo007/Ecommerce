@@ -1,15 +1,26 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { db } from '@/lib/db'
+import { rateLimit, getClientIp } from '@/lib/security'
 
 export async function GET(req: NextRequest) {
   try {
+    // Rate limit: 60 requests per IP per minute
+    const ip = getClientIp(req)
+    const rl = rateLimit(`products:${ip}`, 60, 60 * 1000)
+    if (!rl.allowed) {
+      return NextResponse.json(
+        { error: 'Too many requests.' },
+        { status: 429, headers: { 'Retry-After': String(Math.ceil(rl.retryAfterMs / 1000)) } }
+      )
+    }
+
     const { searchParams } = new URL(req.url)
     const category = searchParams.get('category')
     const filter = searchParams.get('filter')
     const search = searchParams.get('search')
     const sort = searchParams.get('sort')
     const page = Number(searchParams.get('page')) || 1
-    const limit = Number(searchParams.get('limit')) || 24
+    const limit = Math.min(Number(searchParams.get('limit')) || 24, 100) // cap at 100
     const skip = (page - 1) * limit
 
     const where: any = { isAvailable: true }
@@ -46,7 +57,7 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json({ products, total, page, pages: Math.ceil(total / limit) })
   } catch (error) {
-    console.error('Products API error:', error)
+    if (process.env.NODE_ENV === 'development') console.error('Products API error:', error)
     return NextResponse.json({ error: 'Failed to fetch products.' }, { status: 500 })
   }
 }

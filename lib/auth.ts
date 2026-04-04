@@ -5,10 +5,25 @@ import GoogleProvider from 'next-auth/providers/google'
 import bcrypt from 'bcryptjs'
 import { db } from '@/lib/db'
 
+const isProduction = process.env.NODE_ENV === 'production'
+
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(db) as any,
   session: {
     strategy: 'jwt',
+    maxAge: 2 * 60 * 60, // 2 hours
+    updateAge: 15 * 60, // refresh token every 15 minutes
+  },
+  cookies: {
+    sessionToken: {
+      name: isProduction ? '__Secure-next-auth.session-token' : 'next-auth.session-token',
+      options: {
+        httpOnly: true,
+        sameSite: 'lax',
+        path: '/',
+        secure: isProduction,
+      },
+    },
   },
   pages: {
     signIn: '/login',

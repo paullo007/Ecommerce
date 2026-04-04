@@ -63,8 +63,11 @@ export function getInitials(name: string): string {
 }
 
 export function shimmer(w: number, h: number) {
+  // Sanitize inputs to prevent SVG injection
+  const safeW = Math.max(0, Math.min(Math.floor(Number(w) || 0), 4000))
+  const safeH = Math.max(0, Math.min(Math.floor(Number(h) || 0), 4000))
   return `
-<svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="${safeW}" height="${safeH}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <defs>
     <linearGradient id="g">
       <stop stop-color="#f0ebe3" offset="20%" />
@@ -72,9 +75,9 @@ export function shimmer(w: number, h: number) {
       <stop stop-color="#f0ebe3" offset="70%" />
     </linearGradient>
   </defs>
-  <rect width="${w}" height="${h}" fill="#f0ebe3" />
-  <rect id="r" width="${w}" height="${h}" fill="url(#g)" />
-  <animate xlink:href="#r" attributeName="x" from="-${w}" to="${w}" dur="1s" repeatCount="indefinite"  />
+  <rect width="${safeW}" height="${safeH}" fill="#f0ebe3" />
+  <rect id="r" width="${safeW}" height="${safeH}" fill="url(#g)" />
+  <animate xlink:href="#r" attributeName="x" from="-${safeW}" to="${safeW}" dur="1s" repeatCount="indefinite"  />
 </svg>`
 }
 
