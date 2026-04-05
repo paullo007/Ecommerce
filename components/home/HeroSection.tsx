@@ -94,7 +94,7 @@ export function HeroSection() {
           }`}
         >
           {/* Eyebrow */}
-          <p className="eyebrow text-terracotta mb-5 tracking-[0.2em]">{slide.eyebrow}</p>
+          <p className="eyebrow text-terracotta font-bold mb-5 tracking-[0.2em] drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]">{slide.eyebrow}</p>
 
           {/* Headline */}
           <h1 className="font-display text-display-2xl font-light text-white mb-6 leading-[1.05] whitespace-pre-line">
