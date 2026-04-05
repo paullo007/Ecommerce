@@ -91,7 +91,7 @@ export function ServicesPageClient({ services }: ServicesPageClientProps) {
   return (
     <div className="bg-cream-100 min-h-screen">
       {/* Hero */}
-      <section className="relative min-h-[60vh] flex items-end overflow-hidden">
+      <section className="relative min-h-[60vh] flex items-end overflow-hidden pt-20">
         <Image
           src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1800&q=85"
           alt="Luxury interior renovation"
