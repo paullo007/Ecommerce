@@ -81,8 +81,10 @@ export function Navbar() {
             <Link
               href="/"
               className={cn(
-                'font-display font-bold tracking-tight transition-colors duration-300 text-3xl md:text-[2.5rem] leading-[1]',
-                isTransparent ? 'text-white' : 'text-charcoal'
+                'font-display font-bold tracking-tight transition-all duration-500 leading-[1]',
+                isTransparent
+                  ? 'text-white text-[clamp(2.2rem,5vw,3.2rem)]'
+                  : 'text-charcoal text-[clamp(1.4rem,2.5vw,1.8rem)]'
               )}
             >
               Maison<span className="italic"> Avant-Garde</span>
