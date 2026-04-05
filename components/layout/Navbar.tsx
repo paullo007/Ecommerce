@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { useSession, signOut } from 'next-auth/react'
 import { ShoppingBag, Search, User, Heart, Menu, X, ChevronDown } from 'lucide-react'
@@ -54,6 +55,9 @@ export function Navbar() {
   const { data: session } = useSession()
   const { getTotalItems, toggleCart } = useCartStore()
   const totalItems = getTotalItems()
+  const pathname = usePathname()
+  const isHomepage = pathname === '/'
+  const isTransparent = isHomepage && !scrolled
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20)
@@ -66,9 +70,9 @@ export function Navbar() {
       <header
         className={cn(
           'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
-          scrolled
-            ? 'bg-cream-100/95 backdrop-blur-sm border-b border-cream-200 py-3'
-            : 'bg-transparent py-5'
+          isTransparent
+            ? 'bg-transparent py-5'
+            : 'bg-cream-100/95 backdrop-blur-sm border-b border-cream-200 py-3'
         )}
       >
         <div className="max-w-9xl mx-auto px-6 md:px-12">
@@ -78,7 +82,7 @@ export function Navbar() {
               href="/"
               className={cn(
                 'font-display font-light tracking-tight transition-colors duration-300 text-[clamp(1.5rem,3vw,2rem)] leading-[1]',
-                scrolled ? 'text-charcoal' : 'text-white'
+                isTransparent ? 'text-white' : 'text-charcoal'
               )}
             >
               Maison<span className="italic"> Avant-Garde</span>
@@ -97,9 +101,9 @@ export function Navbar() {
                     href={link.href}
                     className={cn(
                       'flex items-center gap-1 text-sm font-medium tracking-wide transition-colors duration-200',
-                      scrolled
-                        ? 'text-charcoal-600 hover:text-charcoal'
-                        : 'text-white/90 hover:text-white'
+                      isTransparent
+                        ? 'text-white/90 hover:text-white'
+                        : 'text-charcoal-600 hover:text-charcoal'
                     )}
                   >
                     {link.label}
@@ -143,9 +147,9 @@ export function Navbar() {
                 onClick={() => setSearchOpen(true)}
                 className={cn(
                   'p-2 rounded-full transition-colors duration-200',
-                  scrolled
-                    ? 'text-charcoal-600 hover:text-charcoal hover:bg-cream-200'
-                    : 'text-white/90 hover:text-white hover:bg-white/10'
+                  isTransparent
+                    ? 'text-white/90 hover:text-white hover:bg-white/10'
+                    : 'text-charcoal-600 hover:text-charcoal hover:bg-cream-200'
                 )}
                 aria-label="Search"
               >
@@ -157,9 +161,9 @@ export function Navbar() {
                 href="/account/wishlist"
                 className={cn(
                   'p-2 rounded-full transition-colors duration-200 hidden sm:flex',
-                  scrolled
-                    ? 'text-charcoal-600 hover:text-charcoal hover:bg-cream-200'
-                    : 'text-white/90 hover:text-white hover:bg-white/10'
+                  isTransparent
+                    ? 'text-white/90 hover:text-white hover:bg-white/10'
+                    : 'text-charcoal-600 hover:text-charcoal hover:bg-cream-200'
                 )}
                 aria-label="Wishlist"
               >
@@ -231,9 +235,9 @@ export function Navbar() {
                 onClick={toggleCart}
                 className={cn(
                   'relative p-2 rounded-full transition-colors duration-200',
-                  scrolled
-                    ? 'text-charcoal-600 hover:text-charcoal hover:bg-cream-200'
-                    : 'text-white/90 hover:text-white hover:bg-white/10'
+                  isTransparent
+                    ? 'text-white/90 hover:text-white hover:bg-white/10'
+                    : 'text-charcoal-600 hover:text-charcoal hover:bg-cream-200'
                 )}
                 aria-label="Cart"
               >
@@ -250,9 +254,9 @@ export function Navbar() {
                 onClick={() => setMobileOpen(!mobileOpen)}
                 className={cn(
                   'lg:hidden p-2 rounded-full transition-colors duration-200',
-                  scrolled
-                    ? 'text-charcoal-600 hover:bg-cream-200'
-                    : 'text-white/90 hover:bg-white/10'
+                  isTransparent
+                    ? 'text-white/90 hover:bg-white/10'
+                    : 'text-charcoal-600 hover:bg-cream-200'
                 )}
                 aria-label="Menu"
               >
