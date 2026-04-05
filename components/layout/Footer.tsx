@@ -100,8 +100,8 @@ export function Footer() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             {/* Logo */}
             <div>
-              <span className="font-display text-lg font-medium">
-                Maison<span className="font-light italic"> Avant-Garde</span>
+              <span className="font-display text-lg font-bold">
+                Maison<span className="italic"> Avant-Garde</span>
               </span>
               <p className="text-white/40 text-xs mt-1">
                 © {new Date().getFullYear()} Maison Avant-Garde. All rights reserved.
