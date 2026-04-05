@@ -81,7 +81,7 @@ export function Navbar() {
             <Link
               href="/"
               className={cn(
-                'font-display font-bold tracking-tight transition-colors duration-300 text-[clamp(1.6rem,3.2vw,2.4rem)] leading-[1]',
+                'font-display font-bold tracking-tight transition-colors duration-300 text-display-lg leading-[1]',
                 isTransparent ? 'text-white' : 'text-charcoal'
               )}
             >
