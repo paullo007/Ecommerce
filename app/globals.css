@@ -61,7 +61,7 @@
   }
 
   .eyebrow {
-    @apply text-xs uppercase tracking-[0.15em] font-sans font-medium;
+    @apply text-lg uppercase tracking-[0.45em] font-sans font-bold;
   }
 
   /* Button variants */
