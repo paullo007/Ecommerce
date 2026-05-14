@@ -1,0 +1,27 @@
+name: Supabase Keep-Alive
+
+on:
+  schedule:
+    # Every 6 hours at 00:00, 06:00, 12:00, 18:00 UTC
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+jobs:
+  ping:
+    name: Ping keep-alive endpoint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Hit /api/keep-alive on production
+        run: |
+          response=$(curl -sS -w "\nHTTP_STATUS:%{http_code}" \
+            -H "Authorization: Bearer ${{ secrets.KEEP_ALIVE_SECRET }}" \
+            "https://ecommerce-paullo007s-projects.vercel.app/api/keep-alive")
+          status=$(echo "$response" | grep -oE 'HTTP_STATUS:[0-9]+' | cut -d: -f2)
+          body=$(echo "$response" | sed 's/HTTP_STATUS:.*//')
+          echo "Status: $status"
+          echo "Body:   $body"
+          if [ "$status" != "200" ]; then
+            echo "::error::Keep-alive ping returned HTTP $status"
+            exit 1
+          fi
