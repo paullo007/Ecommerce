@@ -1,13 +1,23 @@
-name: Deploy Maison Avant-Garde
+name: Sync Database Schema
+
+# Previously named "Deploy Maison Avant-Garde". The Vercel deploy step was
+# removed in 2026-05 because Vercel's Git integration already auto-deploys on
+# push to main — this workflow now only handles Prisma schema sync, and (on
+# explicit manual trigger) re-seeding.
 
 on:
   push:
-    branches: [claude/test-uks1U, main]
+    branches: [main]
   workflow_dispatch:
+    inputs:
+      run_seed:
+        description: 'Also run seed.ts? (DESTRUCTIVE — wipes products/services/categories)'
+        type: boolean
+        default: false
 
 jobs:
-  deploy:
-    name: Setup Database & Deploy
+  sync:
+    name: Sync Prisma schema to Supabase
     runs-on: ubuntu-latest
 
     steps:
@@ -29,23 +39,15 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           DIRECT_URL: ${{ secrets.DIRECT_URL }}
 
-      - name: Push database schema to Supabase
+      - name: Push schema changes to Supabase
         run: npx prisma db push --accept-data-loss
         env:
           DATABASE_URL: ${{ secrets.DIRECT_URL }}
           DIRECT_URL: ${{ secrets.DIRECT_URL }}
 
-      - name: Seed database with products & services
+      - name: Seed database (manual opt-in only)
+        if: github.event_name == 'workflow_dispatch' && inputs.run_seed == true
         run: npx ts-node --compiler-options '{"module":"CommonJS"}' prisma/seed.ts
         env:
           DATABASE_URL: ${{ secrets.DIRECT_URL }}
           DIRECT_URL: ${{ secrets.DIRECT_URL }}
-
-      - name: Deploy to Vercel
-        uses: amondnet/vercel-action@v25
-        with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          vercel-args: '--prod'
-          working-directory: ./
